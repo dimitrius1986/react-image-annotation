@@ -28,16 +28,16 @@ function Line(props) {
           boxSizing: 'border-box',
           pointerEvents: 'auto',
           zIndex: 10,
-          top: 2.5,
-          left: 2.5,
+          top: 4,
+          left: 4,
           boxShadow:
             '0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(0, 0, 0, 0.2), 0 5px 4px rgba(0, 0, 0, 0.4)',
           position: 'absolute'
         }}
         bounds={'parent'}
         size={{
-          width: 5,
-          height: 5
+          width: 8,
+          height: 8
         }}
         disableDragging={selection}
         enableResizing={false}
@@ -92,7 +92,7 @@ function Line(props) {
           toAnchor={geometry.x2 + '% ' + geometry.y2 + '%'}
           borderColor={color}
           borderStyle={'dashed'}
-          borderWidth={2}
+          borderWidth={3}
           className={!props.active ? 'Polygon-LineTo' : 'Polygon-LineToActive'}
         />
       )}
@@ -105,8 +105,8 @@ function Line(props) {
           boxSizing: 'border-box',
           pointerEvents: !selection ? 'auto' : 'none',
           zIndex: 10,
-          top: 2.5,
-          left: 2.5,
+          top: 4,
+          left: 4,
           boxShadow:
             '0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(0, 0, 0, 0.2), 0 5px 4px rgba(0, 0, 0, 0.4)',
 
@@ -115,8 +115,8 @@ function Line(props) {
         disableDragging={selection}
         bounds={'parent'}
         size={{
-          width: 5,
-          height: 5
+          width: 8,
+          height: 8
         }}
         enableResizing={false}
         onDragStop={(e, d, k) => {

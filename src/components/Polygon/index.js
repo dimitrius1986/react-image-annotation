@@ -70,7 +70,7 @@ function Polygon(props) {
               toAnchor={prevItem.x + '% ' + prevItem.y + '%'}
               borderColor={color}
               borderStyle={'dashed'}
-              borderWidth={2}
+              borderWidth={3}
               className={
                 !props.active ? 'Polygon-LineTo' : 'Polygon-LineToActive'
               }
@@ -90,14 +90,14 @@ function Polygon(props) {
 
               boxShadow:
                 '0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(0, 0, 0, 0.2), 0 5px 4px rgba(0, 0, 0, 0.4)',
-              top: 2.5,
-              left: 2.5,
+              top: 4,
+              left: 4,
               zIndex: 10,
               position: 'absolute'
             }}
             size={{
-              width: 5,
-              height: 5
+              width: 8,
+              height: 8
             }}
             bounds={'parent'}
             enableResizing={false}
