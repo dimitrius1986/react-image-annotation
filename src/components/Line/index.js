@@ -17,15 +17,14 @@ function Line(props) {
         position: 'absolute',
         top: 0,
         left: 0,
-        height: '100%',
-        ...props.style
+        height: '100%'
       }}>
       <Resizable
         key={geometry.xPx + '_' + geometry.yPx + '_1'}
         style={{
           border: 'solid 1px ' + color,
           borderRadius: '50%',
-          visibility: isMouseHovering ? 'visible' : 'hidden',
+          visibility: isMouseHovering !== false ? 'visible' : 'hidden',
           boxSizing: 'border-box',
           pointerEvents: 'auto',
           zIndex: 10,
@@ -107,7 +106,7 @@ function Line(props) {
           pointerEvents: !selection ? 'auto' : 'none',
           zIndex: 10,
           top: 4,
-          visibility: isMouseHovering ? 'visible' : 'hidden',
+          visibility: isMouseHovering !== false ? 'visible' : 'hidden',
           left: 4,
           boxShadow:
             '0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(0, 0, 0, 0.2), 0 5px 4px rgba(0, 0, 0, 0.4)',

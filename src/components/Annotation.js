@@ -255,14 +255,7 @@ export default compose(
             draggable={false}
             innerRef={this.setInnerRef}
           />
-          <Items
-            className={'annotationWrapper'}
-            style={{
-              padding: 0,
-              width: '100%',
-              height: '100%',
-              position: 'absolute'
-            }}>
+          <Items className={'annotationWrapper'}>
             {props.annotations.map(annotation =>
               renderHighlight({
                 key: annotation.data.id,
