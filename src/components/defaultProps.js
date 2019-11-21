@@ -76,7 +76,14 @@ export default {
       imageZoomAmount={imageZoomAmount}
     />
   ),
-  renderHighlight: ({ key, annotation, active, onChange, onSubmit }) => {
+  renderHighlight: ({
+    key,
+    annotation,
+    active,
+    onChange,
+    onSubmit,
+    isMouseHovering
+  }) => {
     switch (annotation.geometry.type) {
       case RectangleSelector.TYPE:
         return (
@@ -95,6 +102,7 @@ export default {
             key={key}
             color={annotation.color}
             annotation={annotation}
+            isMouseHovering={isMouseHovering}
             active={active}
             onChange={onChange}
             onSubmit={onSubmit}
@@ -139,6 +147,7 @@ export default {
             key={key}
             color={annotation.color}
             annotation={annotation}
+            isMouseHovering={isMouseHovering}
             onChange={onChange}
             onSubmit={onSubmit}
             active={active}

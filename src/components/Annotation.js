@@ -267,6 +267,7 @@ export default compose(
               renderHighlight({
                 key: annotation.data.id,
                 onSubmit: this.onSubmit,
+                isMouseHovering: isMouseHovering.isHoveringOver,
                 onChange: props.onChange,
                 annotation,
                 active: this.shouldAnnotationBeActive(

@@ -5,7 +5,7 @@ import LineTo from 'react-lineto'
 import Point from '../Point/index'
 
 function Line(props) {
-  const { onChange, onSubmit, annotation, color } = props
+  const { onChange, onSubmit, annotation, color, isMouseHovering } = props
   const { geometry, data, selection } = annotation
 
   if (!geometry) return null
@@ -25,6 +25,7 @@ function Line(props) {
         style={{
           border: 'solid 1px ' + color,
           borderRadius: '50%',
+          visibility: isMouseHovering ? 'visible' : 'hidden',
           boxSizing: 'border-box',
           pointerEvents: 'auto',
           zIndex: 10,
@@ -106,6 +107,7 @@ function Line(props) {
           pointerEvents: !selection ? 'auto' : 'none',
           zIndex: 10,
           top: 4,
+          visibility: isMouseHovering ? 'visible' : 'hidden',
           left: 4,
           boxShadow:
             '0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(0, 0, 0, 0.2), 0 5px 4px rgba(0, 0, 0, 0.4)',

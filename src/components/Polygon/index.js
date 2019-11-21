@@ -23,7 +23,7 @@ function edgesFromPoints(points) {
 }
 
 function Polygon(props) {
-  const { onChange, onSubmit, annotation, color } = props
+  const { onChange, onSubmit, annotation, color, isMouseHovering } = props
   const { geometry, data, selection } = annotation
   if (!geometry || !geometry.points || geometry.points.length === 0) return null
 
@@ -87,7 +87,7 @@ function Polygon(props) {
             style={{
               border: 'solid 1px ' + color,
               borderRadius: '50%',
-
+              visibility: isMouseHovering ? 'visible' : 'hidden',
               boxShadow:
                 '0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(0, 0, 0, 0.2), 0 5px 4px rgba(0, 0, 0, 0.4)',
               top: 4,
