@@ -14,11 +14,12 @@ function Point(props) {
         boxSizing: 'border-box',
         pointerEvents: 'auto',
         zIndex: 1000,
+        top: 8,
+        left: 8,
         boxShadow:
           '0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(0, 0, 0, 0.2), 0 5px 4px rgba(0, 0, 0, 0.4)',
 
-        position: 'absolute',
-        transform: 'translate3d(-50%, -50%, 0)'
+        position: 'absolute'
       }}
       bounds={'parent'}
       size={{
@@ -31,6 +32,12 @@ function Point(props) {
           props.annotation.geometry.xPx !== d.x ||
           props.annotation.geometry.yPx !== d.y
         ) {
+          if (d.x === 0) {
+            d.x = 0.1
+          }
+          if (d.y === 0) {
+            d.y = 0.1
+          }
           props.annotation.geometry.x =
             (d.x * props.annotation.geometry.x) / props.annotation.geometry.xPx
           props.annotation.geometry.y =
@@ -42,8 +49,8 @@ function Point(props) {
         }
       }}
       position={{
-        x: geometry.xPx - 8,
-        y: geometry.yPx - 8
+        x: geometry.xPx,
+        y: geometry.yPx
       }}
     />
   )

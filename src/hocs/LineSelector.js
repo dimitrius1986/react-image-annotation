@@ -69,7 +69,6 @@ export const methods = {
 		if (annotation.selection && annotation.selection.mode === 'SELECTING') {
 			const { anchorX, anchorY } = annotation.selection
 			const { x: newX, y: newY } = getCoordPercentage(e)
-
 			const { anchorXpX, anchorYpX } = annotation.selection
 			const newXpX = e.nativeEvent.offsetX
 			const newYpX = e.nativeEvent.offsetY

@@ -39,9 +39,16 @@ function Line(props) {
           width: 5,
           height: 5
         }}
+        disableDragging={selection}
         enableResizing={false}
         onDragStop={(e, d, k) => {
           if (geometry.xPx !== d.x || geometry.yPx !== d.y) {
+            if (d.x === 0) {
+              d.x = 0.1
+            }
+            if (d.y === 0) {
+              d.y = 0.1
+            }
             geometry.x1 = (d.x * geometry.x1) / geometry.xPx
             geometry.y1 = (d.y * geometry.y1) / geometry.yPx
             geometry.xPx = d.x
@@ -85,7 +92,7 @@ function Line(props) {
           toAnchor={geometry.x2 + '% ' + geometry.y2 + '%'}
           borderColor={color}
           borderStyle={'dashed'}
-          borderWidth={4}
+          borderWidth={2}
           className={!props.active ? 'Polygon-LineTo' : 'Polygon-LineToActive'}
         />
       )}
@@ -105,6 +112,7 @@ function Line(props) {
 
           position: 'absolute'
         }}
+        disableDragging={selection}
         bounds={'parent'}
         size={{
           width: 5,
@@ -113,6 +121,12 @@ function Line(props) {
         enableResizing={false}
         onDragStop={(e, d, k) => {
           if (geometry.x2Px !== d.x || geometry.y2Px !== d.y) {
+            if (d.x === 0) {
+              d.x = 0.1
+            }
+            if (d.y === 0) {
+              d.y = 0.1
+            }
             geometry.x2 = (d.x * geometry.x2) / geometry.x2Px
             geometry.y2 = (d.y * geometry.y2) / geometry.y2Px
             geometry.x2Px = d.x

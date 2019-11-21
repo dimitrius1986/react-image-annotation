@@ -70,7 +70,7 @@ function Polygon(props) {
               toAnchor={prevItem.x + '% ' + prevItem.y + '%'}
               borderColor={color}
               borderStyle={'dashed'}
-              borderWidth={3}
+              borderWidth={2}
               className={
                 !props.active ? 'Polygon-LineTo' : 'Polygon-LineToActive'
               }
@@ -103,6 +103,12 @@ function Polygon(props) {
             enableResizing={false}
             onDragStop={(e, d, k) => {
               if (!selection && (item.x !== d.x || item.y !== d.y)) {
+                if (d.x === 0) {
+                  d.x = 0.1
+                }
+                if (d.y === 0) {
+                  d.y = 0.1
+                }
                 let p = annotation.geometry
                   ? Object.assign([], annotation.geometry.points)
                   : []
