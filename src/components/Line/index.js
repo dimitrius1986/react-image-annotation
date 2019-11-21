@@ -28,8 +28,6 @@ function Line(props) {
           boxSizing: 'border-box',
           pointerEvents: 'auto',
           zIndex: 10,
-          top: 4,
-          left: 4,
           boxShadow:
             '0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(0, 0, 0, 0.2), 0 5px 4px rgba(0, 0, 0, 0.4)',
           position: 'absolute'
@@ -105,9 +103,7 @@ function Line(props) {
           boxSizing: 'border-box',
           pointerEvents: !selection ? 'auto' : 'none',
           zIndex: 10,
-          top: 4,
           visibility: isMouseHovering !== false ? 'visible' : 'hidden',
-          left: 4,
           boxShadow:
             '0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(0, 0, 0, 0.2), 0 5px 4px rgba(0, 0, 0, 0.4)',
 

@@ -100,6 +100,7 @@ function Polygon(props) {
               height: 8
             }}
             bounds={'.annotationWrapper'}
+            disableDragging={selection}
             enableResizing={false}
             onDragStop={(e, d, k) => {
               if (!selection && (item.x !== d.x || item.y !== d.y)) {
