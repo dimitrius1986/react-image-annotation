@@ -11,7 +11,7 @@ function Line(props) {
   if (!geometry) return null
   return (
     <div
-      className={`linesContainer ${props.className}`}
+      className={` ${props.className}`}
       style={{
         width: '100%',
         position: 'absolute',
@@ -84,11 +84,11 @@ function Line(props) {
             '_' +
             geometry.y2
           }
-          from="linesContainer"
+          from="annotationWrapper"
           delay={0}
           within="annotationWrapper"
           fromAnchor={geometry.x1 + '% ' + geometry.y1 + '%'}
-          to="linesContainer"
+          to="annotationWrapper"
           toAnchor={geometry.x2 + '% ' + geometry.y2 + '%'}
           borderColor={color}
           borderStyle={'dashed'}

@@ -29,7 +29,7 @@ function Polygon(props) {
 
   return (
     <div
-      className={`linesContainer ${props.className}`}
+      className={` ${props.className}`}
       style={{
         width: '100%',
         position: 'absolute',
@@ -64,9 +64,9 @@ function Polygon(props) {
               }
               within="annotationWrapper"
               delay={0}
-              from="linesContainer"
+              from="annotationWrapper"
               fromAnchor={item.x + '% ' + item.y + '%'}
-              to="linesContainer"
+              to="annotationWrapper"
               toAnchor={prevItem.x + '% ' + prevItem.y + '%'}
               borderColor={color}
               borderStyle={'dashed'}
@@ -99,7 +99,7 @@ function Polygon(props) {
               width: 8,
               height: 8
             }}
-            bounds={'parent'}
+            bounds={'.annotationWrapper'}
             enableResizing={false}
             onDragStop={(e, d, k) => {
               if (!selection && (item.x !== d.x || item.y !== d.y)) {
