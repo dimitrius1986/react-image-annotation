@@ -98,6 +98,7 @@ function Polygon(props) {
               width: 5,
               height: 5
             }}
+            bounds={'parent'}
             enableResizing={false}
             onDragStop={(e, d, k) => {
               if (!selection && (item.x !== d.x || item.y !== d.y)) {

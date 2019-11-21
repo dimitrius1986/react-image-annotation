@@ -34,6 +34,7 @@ function Line(props) {
           position: 'absolute',
           transform: 'translate3d(-50%, -50%, 0)'
         }}
+        bounds={'parent'}
         size={{
           width: 10,
           height: 10
