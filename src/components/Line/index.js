@@ -23,21 +23,21 @@ function Line(props) {
       <Resizable
         key={geometry.xPx + '_' + geometry.yPx + '_1'}
         style={{
-          border: 'solid 2px ' + color,
+          border: 'solid 1px ' + color,
           borderRadius: '50%',
           boxSizing: 'border-box',
           pointerEvents: 'auto',
           zIndex: 10,
+          top: 2.5,
+          left: 2.5,
           boxShadow:
             '0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(0, 0, 0, 0.2), 0 5px 4px rgba(0, 0, 0, 0.4)',
-
-          position: 'absolute',
-          transform: 'translate3d(-50%, -50%, 0)'
+          position: 'absolute'
         }}
         bounds={'parent'}
         size={{
-          width: 10,
-          height: 10
+          width: 5,
+          height: 5
         }}
         enableResizing={false}
         onDragStop={(e, d, k) => {
@@ -61,8 +61,8 @@ function Line(props) {
           }
         }}
         position={{
-          x: geometry.xPx - 5,
-          y: geometry.yPx - 5
+          x: geometry.xPx,
+          y: geometry.yPx
         }}
       />
 
@@ -93,20 +93,22 @@ function Line(props) {
       <Resizable
         key={geometry.x2Px + '_' + geometry.y2Px + '_2'}
         style={{
-          border: 'solid 2px ' + color,
+          border: 'solid 1px ' + color,
           borderRadius: '50%',
           boxSizing: 'border-box',
           pointerEvents: !selection ? 'auto' : 'none',
           zIndex: 10,
+          top: 2.5,
+          left: 2.5,
           boxShadow:
             '0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(0, 0, 0, 0.2), 0 5px 4px rgba(0, 0, 0, 0.4)',
 
-          position: 'absolute',
-          transform: 'translate3d(-50%, -50%, 0)'
+          position: 'absolute'
         }}
+        bounds={'parent'}
         size={{
-          width: 10,
-          height: 10
+          width: 5,
+          height: 5
         }}
         enableResizing={false}
         onDragStop={(e, d, k) => {
@@ -130,8 +132,8 @@ function Line(props) {
           }
         }}
         position={{
-          x: geometry.x2Px - 5,
-          y: geometry.y2Px - 5
+          x: geometry.x2Px,
+          y: geometry.y2Px
         }}
       />
     </div>
