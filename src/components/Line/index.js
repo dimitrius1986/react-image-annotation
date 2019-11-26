@@ -37,7 +37,7 @@ function Line(props) {
           width: 8,
           height: 8
         }}
-        disableDragging={selection}
+        disableDragging={selection ? true : false}
         enableResizing={false}
         onDragStop={(e, d, k) => {
           if (geometry.xPx !== d.x || geometry.yPx !== d.y) {
@@ -109,7 +109,7 @@ function Line(props) {
 
           position: 'absolute'
         }}
-        disableDragging={selection}
+        disableDragging={selection ? true : false}
         bounds={'parent'}
         size={{
           width: 8,
