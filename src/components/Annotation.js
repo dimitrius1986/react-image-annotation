@@ -181,7 +181,7 @@ export default compose(
     onSelectionUndo = () => this.callSelectorMethod('onSelectionUndo')
 
     onSubmit = annotation => {
-      if (!this.props.value.data && annotation.data) {
+      if (!this.props.value.data && annotation && annotation.data) {
         this.props.onSubmit(annotation)
       } else {
         this.props.onSubmit(this.props.value)
