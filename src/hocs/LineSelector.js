@@ -17,40 +17,58 @@ export function area(geometry) {
 export const methods = {
 	onMouseDown(annotation, e) {
 		if (!annotation.selection) {
-			const { x: anchorX, y: anchorY } = getCoordPercentage(e)
-
+			const coordOfClick = getCoordPercentage(e)
+			const x = coordOfClick.x
+			const y = coordOfClick.y
+			const width = 0
+			const height = 0
 			return {
 				...annotation,
+				geometry: {
+					...annotation.geometry,
+					type: TYPE,
+					x,
+					y,
+					width,
+					height,
+					points: [coordOfClick]
+				},
 				id: Math.random(),
 				selection: {
 					...annotation.selection,
-					mode: 'SELECTING',
-					anchorX,
-					anchorXpX: e.nativeEvent.offsetX,
-					anchorYpX: e.nativeEvent.offsetY,
-					anchorY
+					mode: 'SELECTING'
 				}
 			}
 		} else {
 			return {}
 		}
-
 		return annotation
 	},
-
 	onMouseUp(annotation, e) {
 		if (annotation.selection) {
 			const { selection, geometry } = annotation
-
 			if (!geometry) {
 				return {}
 			}
-
+			const coordOfClick = getCoordPercentage(e)
+			let points = [...geometry.points, coordOfClick]
+			const x = points.sort((a, b) => (a.x < b.x ? -1 : 1))[0].x
+			const y = points.sort((a, b) => (a.y < b.y ? -1 : 1))[0].y
+			const width = points.sort((a, b) => (a.x > b.x ? -1 : 1))[0].x - x
+			const height = points.sort((a, b) => (a.y > b.y ? -1 : 1))[0].y - y
 			switch (annotation.selection.mode) {
 				case 'SELECTING':
 					return {
 						...annotation,
-
+						geometry: {
+							...geometry,
+							type: TYPE,
+							x,
+							y,
+							width,
+							height,
+							points
+						},
 						selection: {
 							...annotation.selection,
 							showEditor: true,
@@ -61,57 +79,6 @@ export const methods = {
 					break
 			}
 		}
-
-		return annotation
-	},
-
-	onMouseMove(annotation, e) {
-		if (annotation.selection && annotation.selection.mode === 'SELECTING') {
-			const { anchorX, anchorY } = annotation.selection
-			const { x: newX, y: newY } = getCoordPercentage(e)
-			const { anchorXpX, anchorYpX } = annotation.selection
-			const newXpX = e.nativeEvent.offsetX
-			const newYpX = e.nativeEvent.offsetY
-			const x = anchorX < newX ? anchorX : newX
-			const y = anchorY < newY ? anchorY : newY
-			const x1 = anchorX
-			const y1 = anchorY
-			const x2 = newX
-			const y2 = newY
-
-			const xPx = anchorXpX
-			const yPx = anchorYpX
-			const x2Px = newXpX
-			const y2Px = newYpX
-			const widthPx = xPx - x2Px
-			const heightPx = yPx - y2Px
-			const width = x - x2
-			const height = y - y2
-
-			return {
-				...annotation,
-				id: Math.random(),
-				geometry: {
-					...annotation.geometry,
-					type: TYPE,
-					x,
-					y,
-					x1,
-					y1,
-					x2,
-					y2,
-					xPx,
-					yPx,
-					x2Px,
-					y2Px,
-					widthPx: Math.abs(widthPx),
-					heightPx: Math.abs(heightPx),
-					width: Math.abs(width),
-					height: Math.abs(height)
-				}
-			}
-		}
-
 		return annotation
 	}
 }

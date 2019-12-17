@@ -9,7 +9,7 @@ import { PolygonSelector } from '../selectors'
 
 import defaultProps from './defaultProps'
 import Overlay from './Overlay'
-
+import './main.css'
 const Container = styled.div`
   clear: both;
   position: relative;
@@ -180,8 +180,12 @@ export default compose(
     onSelectionClear = () => this.callSelectorMethod('onSelectionClear')
     onSelectionUndo = () => this.callSelectorMethod('onSelectionUndo')
 
-    onSubmit = () => {
-      this.props.onSubmit(this.props.value)
+    onSubmit = annotation => {
+      if (!this.props.value.data && annotation.data) {
+        this.props.onSubmit(annotation)
+      } else {
+        this.props.onSubmit(this.props.value)
+      }
     }
 
     callSelectorMethod = (methodName, e) => {
@@ -255,7 +259,16 @@ export default compose(
             draggable={false}
             innerRef={this.setInnerRef}
           />
-          <Items className={'annotationWrapper'}>
+          <Items
+            className={'annotationWrapper'}
+            style={{
+              width: '100%',
+              height: '100%',
+              overflow: 'hidden',
+              position: 'absolute',
+              top: 0,
+              left: 0
+            }}>
             {props.annotations.map(annotation =>
               renderHighlight({
                 key: annotation.data.id,

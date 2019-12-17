@@ -96,7 +96,6 @@ export const methods = {
       }
     }
   },
-
   onSelectionClear(annotation) {
     return {
       ...annotation,
@@ -106,7 +105,6 @@ export const methods = {
       }
     }
   },
-
   onSelectionUndo(annotation) {
     return {
       ...annotation,
@@ -154,7 +152,6 @@ export const methods = {
       },
       selection: {
         ...annotation.selection,
-
         mode: 'SELECTING'
       }
     }

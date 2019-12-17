@@ -1,7 +1,7 @@
 import React from 'react'
 import LineTo from 'react-lineto'
-import styled from 'styled-components'
-import { Rnd as Resizable } from 'react-rnd'
+
+import { getOffsetCoordPercentage } from '../../utils/offsetCoordinates'
 
 function edgesFromPoints(points) {
   if (!points || points.length < 3) return []
@@ -28,28 +28,16 @@ function Polygon(props) {
   if (!geometry || !geometry.points || geometry.points.length === 0) return null
 
   return (
-    <div
-      className={` ${props.className}`}
-      style={{
-        width: '100%',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        height: '100%',
-        ...props.style
-      }}>
+    <div>
       {geometry.points.length >= 3 &&
         geometry.points.map((item, i) => {
-          // Iterate over points to create the edge lines
           let prevItem
           if (i === 0) {
-            // First point (links from last to first)
             prevItem = geometry.points[geometry.points.length - 1]
           } else {
             prevItem = geometry.points[i - 1]
           }
           return (
-            // Note that each LineTo element must have a unique key (unique relative to the connected points)
             <LineTo
               key={
                 i +
@@ -63,7 +51,6 @@ function Polygon(props) {
                 prevItem.y
               }
               within="annotationWrapper"
-              delay={0}
               from="annotationWrapper"
               fromAnchor={item.x + '% ' + item.y + '%'}
               to="annotationWrapper"
@@ -71,79 +58,63 @@ function Polygon(props) {
               borderColor={color}
               borderStyle={'dashed'}
               borderWidth={3}
-              className={
-                !props.active ? 'Polygon-LineTo' : 'Polygon-LineToActive'
-              }
+              className={'LineTo'}
             />
           )
         })}
-      {geometry.points.map((item, i) => {
-        // Iterate over points to points
-        return (
-          // Note that each LineTo element must have a unique key (unique relative to the point)
 
-          <Resizable
+      {geometry.points.map((item, i) => {
+        return (
+          <div
+            draggable={!selection ? true : false}
+            onDragEnd={e => {
+              let point = getOffsetCoordPercentage(
+                e,
+                document.getElementsByClassName('annotationWrapper')[0]
+              )
+              if (
+                item.x === point.x ||
+                item.y === point.y ||
+                point.y > 100 ||
+                point.x > 100 ||
+                point.y < 0 ||
+                point.x < 0
+              ) {
+                return
+              }
+              item = point
+              geometry.points[i] = point
+              let points = annotation.geometry
+                ? Object.assign([], annotation.geometry.points)
+                : []
+              onSubmit({
+                ...annotation,
+                geometry: {
+                  ...geometry,
+                  x: points.sort((a, b) => (a.x < b.x ? -1 : 1))[0].x,
+                  y: points.sort((a, b) => (a.y < b.y ? -1 : 1))[0].y,
+                  width:
+                    points.sort((a, b) => (a.x > b.x ? -1 : 1))[0].x -
+                    points.sort((a, b) => (a.x < b.x ? -1 : 1))[0].x,
+                  height:
+                    points.sort((a, b) => (a.y > b.y ? -1 : 1))[0].y -
+                    points.sort((a, b) => (a.y < b.y ? -1 : 1))[0].y
+                }
+              })
+            }}
             key={i + '_' + item.x + '_' + item.y}
             style={{
               border: 'solid 1px ' + color,
               borderRadius: '50%',
-              visibility: isMouseHovering !== false ? 'visible' : 'hidden',
+              width: 4,
+              cursor: !selection ? 'crosshair' : '',
+              height: 4,
               boxShadow:
                 '0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(0, 0, 0, 0.2), 0 5px 4px rgba(0, 0, 0, 0.4)',
-              top: 4,
-              left: 4,
               zIndex: 10,
+              left: item.xPx,
+              top: item.yPx,
               position: 'absolute'
-            }}
-            size={{
-              width: 8,
-              height: 8
-            }}
-            bounds={'.annotationWrapper'}
-            disableDragging={selection ? true : false}
-            enableResizing={false}
-            onDragStop={(e, d, k) => {
-              if (!selection && (item.x !== d.x || item.y !== d.y)) {
-                if (d.x === 0) {
-                  d.x = 0.1
-                }
-                if (d.y === 0) {
-                  d.y = 0.1
-                }
-                let p = annotation.geometry
-                  ? Object.assign([], annotation.geometry.points)
-                  : []
-                annotation.geometry.points[i].x =
-                  (d.x * annotation.geometry.points[i].x) /
-                  annotation.geometry.points[i].xPx
-                annotation.geometry.points[i].y =
-                  (d.y * annotation.geometry.points[i].y) /
-                  annotation.geometry.points[i].yPx
-                annotation.geometry.points[i].xPx = d.x
-                annotation.geometry.points[i].yPx = d.y
-
-                annotation.geometry.x = p.sort((a, b) =>
-                  a.x < b.x ? -1 : 1
-                )[0].x
-
-                annotation.geometry.y = p.sort((a, b) =>
-                  a.y < b.y ? -1 : 1
-                )[0].y
-
-                annotation.geometry.width =
-                  p.sort((a, b) => (a.x > b.x ? -1 : 1))[0].x -
-                  annotation.geometry.x
-
-                annotation.geometry.height =
-                  p.sort((a, b) => (a.y > b.y ? -1 : 1))[0].y -
-                  annotation.geometry.y
-                onChange(annotation)
-                onSubmit()
-              }
-            }}
-            position={{
-              x: item.xPx,
-              y: item.yPx
             }}
           />
         )

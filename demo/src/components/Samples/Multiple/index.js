@@ -26,11 +26,18 @@ export default class Multiple extends Component {
   }
 
   onSubmit = annotation => {
+    console.log(annotation)
     const { geometry, data } = annotation
-
-    this.setState({
-      annotation: {},
-      annotations: this.state.annotations.concat({
+    const { annotations } = this.state
+    const exist = annotations.find(a => a.data.id === data.id)
+    if (exist) {
+      annotations.forEach((a, ind) => {
+        if (a.data.id === data.id) {
+          annotations[ind] = annotation
+        }
+      })
+    } else {
+      annotations.push({
         color: 'red',
         geometry,
         data: {
@@ -38,6 +45,10 @@ export default class Multiple extends Component {
           id: Math.random()
         }
       })
+    }
+    this.setState({
+      annotation: {},
+      annotations
     })
   }
 
