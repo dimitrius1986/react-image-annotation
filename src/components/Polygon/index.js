@@ -82,7 +82,6 @@ function Polygon(props) {
               ) {
                 return
               }
-              item = point
               geometry.points[i] = point
               let points = annotation.geometry
                 ? Object.assign([], annotation.geometry.points)
@@ -106,9 +105,10 @@ function Polygon(props) {
             style={{
               border: 'solid 1px ' + color,
               borderRadius: '50%',
-              width: 4,
-              cursor: !selection ? 'crosshair' : '',
-              height: 4,
+              width: 8,
+              visibility: isMouseHovering !== false ? 'visible' : 'hidden',
+              cursor: !selection ? 'move' : '',
+              height: 8,
               boxShadow:
                 '0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(0, 0, 0, 0.2), 0 5px 4px rgba(0, 0, 0, 0.4)',
               zIndex: 10,

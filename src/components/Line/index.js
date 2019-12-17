@@ -43,7 +43,7 @@ function Line(props) {
             toAnchor={prevItem.x + '% ' + prevItem.y + '%'}
             borderColor={color}
             borderStyle={'dashed'}
-            borderWidth={3}
+            borderWidth={4}
             className={'LineTo'}
           />
         )
@@ -54,6 +54,7 @@ function Line(props) {
           <div
             draggable={!selection ? true : false}
             onDragEnd={e => {
+              e.preventDefault()
               let point = getOffsetCoordPercentage(
                 e,
                 document.getElementsByClassName('annotationWrapper')[0]
@@ -74,7 +75,6 @@ function Line(props) {
                 : []
 
               points[i] = point
-
               onSubmit({
                 ...annotation,
                 geometry: {
@@ -95,9 +95,10 @@ function Line(props) {
             style={{
               border: 'solid 1px ' + color,
               borderRadius: '50%',
-              width: 4,
-              cursor: !selection ? 'crosshair' : '',
-              height: 4,
+              width: 8,
+              cursor: !selection ? 'move' : '',
+              height: 8,
+              visibility: isMouseHovering !== false ? 'visible' : 'hidden',
               boxShadow:
                 '0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(0, 0, 0, 0.2), 0 5px 4px rgba(0, 0, 0, 0.4)',
               zIndex: 10,

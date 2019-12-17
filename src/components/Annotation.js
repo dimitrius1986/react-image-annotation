@@ -9,6 +9,9 @@ import { PolygonSelector } from '../selectors'
 
 import defaultProps from './defaultProps'
 import Overlay from './Overlay'
+document.addEventListener('dragover', function(e) {
+  e.preventDefault()
+})
 
 const Container = styled.div`
   clear: both;
