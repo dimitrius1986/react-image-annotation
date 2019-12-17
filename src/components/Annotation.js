@@ -9,7 +9,7 @@ import { PolygonSelector } from '../selectors'
 
 import defaultProps from './defaultProps'
 import Overlay from './Overlay'
-import './main.css'
+
 const Container = styled.div`
   clear: both;
   position: relative;
