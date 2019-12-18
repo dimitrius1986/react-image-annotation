@@ -10,6 +10,13 @@ import Overlay from './Overlay'
 document.addEventListener('dragover', function(e) {
   e.preventDefault()
 })
+var style = document.createElement('style')
+style.innerHTML = `
+  .LineTo {
+  pointer-events: none;
+  }
+  `
+document.head.appendChild(style)
 
 const Container = styled.div`
   clear: both;

@@ -58,7 +58,7 @@ function Rectangle(props) {
               toAnchor={prevItem.x + '% ' + prevItem.y + '%'}
               borderColor={color}
               borderStyle={'dashed'}
-              borderWidth={3}
+              borderWidth={4}
               className={'LineTo'}
             />
           )
