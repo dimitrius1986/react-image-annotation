@@ -91,6 +91,7 @@ export default {
             key={key}
             color={annotation.color}
             annotation={annotation}
+            isMouseHovering={isMouseHovering}
             onChange={onChange}
             onSubmit={onSubmit}
             active={active}
