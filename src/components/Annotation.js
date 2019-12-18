@@ -248,12 +248,9 @@ export default compose(
 
       return (
         <Container
+          className={'annotationWrapper'}
           style={{
-            ...props.style,
-            width: '100%',
-            minHeight: '100%',
-            top: 0,
-            left: 0
+            ...props.style
           }}
           innerRef={isMouseHovering.innerRef}
           onMouseLeave={this.onTargetMouseLeave}>
@@ -266,16 +263,7 @@ export default compose(
             draggable={false}
             innerRef={this.setInnerRef}
           />
-          <Items
-            className={'annotationWrapper'}
-            style={{
-              width: '100%',
-              height: '100%',
-              overflow: 'hidden',
-              position: 'absolute',
-              top: 0,
-              left: 0
-            }}>
+          <Items>
             {props.annotations.map(annotation =>
               renderHighlight({
                 key: annotation.data.id,
