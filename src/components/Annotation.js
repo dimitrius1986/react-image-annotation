@@ -251,8 +251,7 @@ export default compose(
           style={{
             ...props.style,
             width: '100%',
-            height: '100%',
-            overflow: 'hidden',
+            minHeight: '100%',
             top: 0,
             left: 0
           }}
@@ -273,6 +272,7 @@ export default compose(
               width: '100%',
               height: '100%',
               overflow: 'hidden',
+              position: 'absolute',
               top: 0,
               left: 0
             }}>
