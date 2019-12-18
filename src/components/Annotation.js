@@ -4,9 +4,7 @@ import styled from 'styled-components'
 import compose from '../utils/compose'
 import isMouseHovering from '../utils/isMouseHovering'
 import withRelativeMousePos from '../utils/withRelativeMousePos'
-import { Rnd as Resizable } from 'react-rnd'
 import { PolygonSelector } from '../selectors'
-
 import defaultProps from './defaultProps'
 import Overlay from './Overlay'
 document.addEventListener('dragover', function(e) {
@@ -250,7 +248,14 @@ export default compose(
 
       return (
         <Container
-          style={props.style}
+          style={{
+            ...props.style,
+            width: '100%',
+            height: '100%',
+            overflow: 'hidden',
+            top: 0,
+            left: 0
+          }}
           innerRef={isMouseHovering.innerRef}
           onMouseLeave={this.onTargetMouseLeave}>
           <Img
@@ -268,7 +273,6 @@ export default compose(
               width: '100%',
               height: '100%',
               overflow: 'hidden',
-              position: 'absolute',
               top: 0,
               left: 0
             }}>
