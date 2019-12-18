@@ -45,15 +45,14 @@ function Point(props) {
       style={{
         border: 'solid 1px ' + color,
         borderRadius: '50%',
-        width: 8,
-        visibility: isMouseHovering !== false ? 'visible' : 'hidden',
+        width: 16,
         cursor: !selection ? 'move' : '',
-        height: 8,
+        height: 16,
         boxShadow:
           '0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(0, 0, 0, 0.2), 0 5px 4px rgba(0, 0, 0, 0.4)',
         zIndex: 10,
-        left: `calc(${item.xPx}px - 4px)`,
-        top: `calc(${item.yPx}px - 4px)`,
+        left: `calc(${item.xPx}px - 8px)`,
+        top: `calc(${item.yPx}px - 8px)`,
         position: 'absolute'
       }}
     />

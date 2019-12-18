@@ -50,6 +50,7 @@ function Polygon(props) {
                 '_' +
                 prevItem.y
               }
+              delay={0}
               within="annotationWrapper"
               from="annotationWrapper"
               fromAnchor={item.x + '% ' + item.y + '%'}
