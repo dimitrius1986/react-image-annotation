@@ -4,14 +4,7 @@ import LineTo from 'react-lineto'
 
 import { getOffsetCoordPercentage } from '../../utils/offsetCoordinates'
 function Line(props) {
-  const {
-    onChange,
-    onSubmit,
-    annotation,
-    color,
-    isMouseHovering,
-    active
-  } = props
+  const { onSubmit, annotation, color, isMouseHovering, active } = props
   const { geometry, data, selection } = annotation
   if (!geometry) return null
   return (
@@ -102,8 +95,8 @@ function Line(props) {
               boxShadow:
                 '0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(0, 0, 0, 0.2), 0 5px 4px rgba(0, 0, 0, 0.4)',
               zIndex: 10,
-              left: item.xPx,
-              top: item.yPx,
+              left: `calc(${item.xPx}px - 4px)`,
+              top: `calc(${item.yPx}px - 4px)`,
               position: 'absolute'
             }}
           />

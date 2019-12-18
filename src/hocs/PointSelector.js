@@ -28,6 +28,7 @@ export function area(geometry, container) {
 export const methods = {
   onClick(annotation, e) {
     if (!annotation.geometry) {
+      const coordOfClick = getCoordPercentage(e)
       return {
         ...annotation,
         selection: {
@@ -38,9 +39,11 @@ export const methods = {
         geometry: {
           id: Math.random(),
           ...annotation.geometry,
-          ...getCoordPercentage(e),
+          points: [...coordOfClick],
           width: 0,
           height: 0,
+          x: coordOfClick.x,
+          y: coordOfClick.y,
           type: TYPE
         }
       }

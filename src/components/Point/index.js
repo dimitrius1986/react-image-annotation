@@ -1,56 +1,60 @@
 import React from 'react'
-import { Rnd as Resizable } from 'react-rnd'
-
+import { getOffsetCoordPercentage } from '../../utils/offsetCoordinates'
 function Point(props) {
-  const { geometry, data } = props.annotation
-  const { color } = props
+  const { geometry, data, selection } = props.annotation
+  const { color, isMouseHovering, onSubmit } = props
   if (!geometry) return null
-
+  let item = geometry.points[0]
   return (
-    <Resizable
+    <div
+      draggable={!selection ? true : false}
+      onDragEnd={e => {
+        let point = getOffsetCoordPercentage(
+          e,
+          document.getElementsByClassName('annotationWrapper')[0]
+        )
+        if (
+          item.x === point.x ||
+          item.y === point.y ||
+          point.y > 100 ||
+          point.x > 100 ||
+          point.y < 0 ||
+          point.x < 0
+        ) {
+          return
+        }
+        geometry.points[0] = point
+        let points = props.annotation.geometry
+          ? Object.assign([], props.annotation.geometry.points)
+          : []
+        onSubmit({
+          ...props.annotation,
+          geometry: {
+            ...geometry,
+            x: points.sort((a, b) => (a.x < b.x ? -1 : 1))[0].x,
+            y: points.sort((a, b) => (a.y < b.y ? -1 : 1))[0].y,
+            width:
+              points.sort((a, b) => (a.x > b.x ? -1 : 1))[0].x -
+              points.sort((a, b) => (a.x < b.x ? -1 : 1))[0].x,
+            height:
+              points.sort((a, b) => (a.y > b.y ? -1 : 1))[0].y -
+              points.sort((a, b) => (a.y < b.y ? -1 : 1))[0].y
+          }
+        })
+      }}
       style={{
-        border: 'solid 2px ' + color,
+        border: 'solid 1px ' + color,
         borderRadius: '50%',
-        boxSizing: 'border-box',
-        pointerEvents: 'auto',
-        zIndex: 1000,
-        top: 8,
-        left: 8,
+        width: 8,
+        visibility: isMouseHovering !== false ? 'visible' : 'hidden',
+        cursor: !selection ? 'move' : '',
+        height: 8,
         boxShadow:
           '0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(0, 0, 0, 0.2), 0 5px 4px rgba(0, 0, 0, 0.4)',
-
+        zIndex: 10,
+        left: `calc(${item.xPx}px - 4px)`,
+        top: `calc(${item.yPx}px - 4px)`,
         position: 'absolute'
-      }}
-      bounds={'parent'}
-      size={{
-        width: 16,
-        height: 16
-      }}
-      enableResizing={false}
-      onDragStop={(e, d, k) => {
-        if (
-          props.annotation.geometry.xPx !== d.x ||
-          props.annotation.geometry.yPx !== d.y
-        ) {
-          if (d.x === 0) {
-            d.x = 0.1
-          }
-          if (d.y === 0) {
-            d.y = 0.1
-          }
-          props.annotation.geometry.x =
-            (d.x * props.annotation.geometry.x) / props.annotation.geometry.xPx
-          props.annotation.geometry.y =
-            (d.y * props.annotation.geometry.y) / props.annotation.geometry.yPx
-          props.annotation.geometry.xPx = d.x
-          props.annotation.geometry.yPx = d.y
-          props.onChange(props.annotation)
-          props.onSubmit()
-        }
-      }}
-      position={{
-        x: geometry.xPx,
-        y: geometry.yPx
       }}
     />
   )

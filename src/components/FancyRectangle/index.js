@@ -14,41 +14,38 @@ const Container = styled.div`
   right: 0;
 `
 
-function FancyRectangle (props) {
-  const { geometry } = props.annotation
+function FancyRectangle(props) {
+  const { selection } = props.annotation
 
-  if (!geometry) return null
+  if (!selection) return null
 
   return (
-    <Container
-      className={props.className}
-      style={props.style}
-    >
+    <Container className={props.className} style={props.style}>
       <Box
         style={{
-          height: `${geometry.y}%`,
+          height: `${selection.y}%`,
           width: '100%'
         }}
       />
       <Box
         style={{
-          top: `${geometry.y}%`,
-          height: `${geometry.height}%`,
-          width: `${geometry.x}%`
+          top: `${selection.y}%`,
+          height: `${selection.height}%`,
+          width: `${selection.x}%`
         }}
       />
       <Box
         style={{
-          top: `${geometry.y}%`,
-          left: `${geometry.x + geometry.width}%`,
-          height: `${geometry.height}%`,
-          width: `${100 - (geometry.x + geometry.width)}%`
+          top: `${selection.y}%`,
+          left: `${selection.x + selection.width}%`,
+          height: `${selection.height}%`,
+          width: `${100 - (selection.x + selection.width)}%`
         }}
       />
       <Box
         style={{
-          top: `${geometry.y + geometry.height}%`,
-          height: `${100 - (geometry.y + geometry.height)}%`,
+          top: `${selection.y + selection.height}%`,
+          height: `${100 - (selection.y + selection.height)}%`,
           width: '100%'
         }}
       />
