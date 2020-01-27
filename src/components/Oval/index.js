@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Rnd as Resizable } from 'react-rnd'
 
 function Oval(props) {
   const { onChange, onSubmit, annotation, color } = props
@@ -8,7 +7,7 @@ function Oval(props) {
   if (!geometry) return null
 
   return (
-    <Resizable
+    <div
       className={props.className}
       style={{
         border: 'dashed 2px ' + color,
