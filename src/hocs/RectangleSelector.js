@@ -51,7 +51,7 @@ export const methods = {
     if (annotation.selection) {
       const { selection, geometry } = annotation
       console.log(area(selection))
-      if (!geometry || area(selection) < 2) {
+      if (!geometry || isNan(area(selection)) || area(selection) < 2) {
         return {}
       }
 
