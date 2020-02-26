@@ -50,8 +50,8 @@ export const methods = {
   onMouseUp(annotation, e) {
     if (annotation.selection) {
       const { selection, geometry } = annotation
-      console.log(area(selection))
-      if (!geometry || isNan(area(selection)) || area(selection) < 2) {
+
+      if (!geometry || isNaN(area(selection)) || area(selection) < 2) {
         return {}
       }
 
