@@ -50,9 +50,10 @@ export const methods = {
   onMouseUp(annotation, e) {
     if (annotation.selection) {
       const { selection, geometry } = annotation
-      if (!geometry) {
+      if (!geometry || area(selection) < 2) {
         return {}
       }
+
       const coordOfClick = getCoordPercentage(e)
       let points = [
         ...geometry.points,
